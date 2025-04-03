@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+{% include "header.html" %}
+<main>
+    <div class="subheader">
+        <h1>{{place.name}}</h1>
+    </div>
+
+    <div class="cointaner">
+        <div class="right-side"
+            style="width: 100%; padding: 30px; display: flex; flex-direction: column; align-items: center;">
+            
+            <div style="width: 100%;">
+                <h1>التعليقات</h1>
+                <hr>
+                <p style="font-size: x-large; text-align: center; margin: 50px;">
+                    قريبا...
+                </p>
+                <button disabled style="background-color: whitesmoke; border-radius: 5px; padding: 10px; width: 30%;">اضافة تعليق</button>
+            </div>
+            <div style="width: 100%; margin-top: 30px;">
+                <h3>تقييم المطعم</h3>
+                <hr>
+                <p style="font-size: x-large; text-align: center; margin: 50px;">
+                    قريبا...
+                </p>
+            </div>
+        </div>
+
+        <div class="right-side"
+            style="width: 100%; padding: 30px; display: flex; flex-direction: column; align-items: center;">
+            {% if place.image %}
+            <img src="{{place.image.url}}" alt="place.name" style="width: 80%; border-radius: 20px;">
+            {% else %}
+            <img src="https://www.mountaineers.org/images/placeholder-images/RoutesPlacesDefaultImage.jpg"
+                style="width: 50%; border-radius: 20px;" alt="place.name">
+            {% endif %}
+            <div style="margin-top: 30px; font-size: larger; text-align: start;">
+                <h4>وصف المطعم</h4>
+                <p>
+                    {{place.desc}}
+                </p>
+                <hr>
+                <h4>فئة المطعم</h4>
+                <p>
+                    {{place.category}}
+                </p>
+                <hr>
+                <h4>الموقع على قوقل ماب</h4>
+                <p>
+                    {% if place.googlMapLink == None %}
+                      غير محدد بعد
+                      {% else %}
+                      <a href="{{place.googlMapLink}}">اضغط هنا</a>
+                    {% endif %}
+                </p>
+                <hr>
+            </div>
+        </div>
+    </div>
+
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+{% endblock content %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="{% static '/css/home.css' %}">
+{% endblock style %}
+
+{% block content %}
+
+{% include "header.html" %}
+
+<main>
+    <div class="subheader">
+        <h1>بياناتي</h1>
+    </div>
+    <div class="cointaner" style="justify-content: center; text-align: center;">
+        <div class="right-side">
+            <div
+                style="color: black; padding: 40px; text-align: start; display: flex; flex-direction: column; justify-content: start; align-items: start;">
+               <div class="mt-2">
+                <h3>المعلومات الشخصية</h3>
+               </div>
+                <div class="m-2">
+                    <span><strong>اسم المستخدم: </strong>{{user.username}}</span>
+                </div>
+                <div class="m-2">
+                    <span><strong>الاسم الاول: </strong>{{user.first_name}}</span>
+                </div>
+                <div class="m-2">
+                    <span><strong>الاسم الثاني: </strong> {{user.last_name}}</span>
+                </div>
+                <div class="m-2">
+                    <span><strong>الايميل: </strong>{{user.email}}</span>
+                </div>
+                <div class="m-2">
+                    <a href="{% url 'update_profile' %}"><button>تعديل بياناتي</button></a>
+                </div>
+            </div>
+            <hr>
+            <h1 class="mt-5" id="jeddah_trip">رحلاتي</h1>
+            <div>
+                <ul>
+                    {% for trip in trips %}
+                    <li
+                        style="display: flex; flex-direction: column; padding: 10px; background-color: rgba(173, 216, 230, 0.249); border-radius: 10px; border: 2px gray solid;">
+                        <h4>معرف الرحلة: {{trip.trip.id}}</h4>
+                        <strong>الاماكن: </strong>
+                        <table class="table table-primary table-striped" border="1">
+                            <thead>
+                                <tr>
+                                    <th>اسم المكان</th>
+                                    <th>موقع المكان</th>
+                                    <th>فئة المكان</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for place in trip.places %}
+                                <tr>
+                                    <td>{{place.name}}</td>
+                                    <td>{{place.googlMapLink}}</td>
+                                    <td>{{place.category}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <strong>المطاعم: </strong>
+                        <table class="table table-info table-striped" border="1">
+                            <thead>
+                                <tr>
+                                    <th>اسم المطعم</th>
+                                    <th>موقع المطعم</th>
+                                    <th>فئة المطعم</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for rest in trip.restuarants %}
+                                <tr>
+                                    <td>{{rest.name}}</td>
+                                    <td>{{rest.googlMapLink}}</td>
+                                    <td>{{rest.category}}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <div style="display: flex;">
+                            <a href=""><button style="width: 100px;">ارسال PDF</button></a>
+                            <a href="{% url 'delete_trip' trip.trip.id %}"><button style="width: 100%; background-color: lightcoral;">حذف</button></a>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+    integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+    crossorigin="anonymous"></script>
+{% endblock content %}

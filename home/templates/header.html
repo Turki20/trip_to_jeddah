@@ -1,0 +1,13 @@
+<header>
+    <h2>اهلا بكم في جدة</h2>
+    <div class="btns">
+        {% if user.is_authenticated %}
+        <a href="{% url "logout" %}"><button>تسجيل الخروج</button></a>
+        <a href="{% url 'home_page' %}"><button> الرئيسية</button></a>
+        {% else %}
+        <a href="{% url 'login' %}"><button>تسجيل الدخول</button></a>
+        <a href="{% url 'register' %}"><button>إنشاء حساب</button></a>
+        {% endif %}
+        
+    </div>
+</header>

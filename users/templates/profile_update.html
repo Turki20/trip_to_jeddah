@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "/css/home.css" %}">
+{% endblock style %}
+
+{% block content %}
+      
+{% include "header.html" %}
+
+<main>
+    <div class="subheader">
+        <h1>المعلومات الرئيسية</h1>
+    </div>
+    <div class="cointaner" style="justify-content: center; text-align: center;">
+        <div class="right-side">
+               <form action="{% url 'update_profile' %}" method="post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit">حفظ</button>
+               </form>
+        </div>
+    </div>
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+{% endblock content %}

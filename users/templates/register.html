@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "/css/home.css" %}">
+{% endblock style %}
+
+{% block content %}
+      
+{% include "header.html" %}
+
+<main>
+    <div class="subheader">
+        <h1>تسجيل</h1>
+    </div>
+    <div class="cointaner" style="justify-content: center; text-align: center;">
+        <div class="right-side">
+            <form action="{% url 'register' %}" method="post" class="inputs">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="btns">
+                    <button type="submit" style="width: 100%;height: 40px; font-size: 17px; background-color: #01617e; color: whitesmoke;">تسجيل</button>
+                </div>
+                <div>
+                    <span>لديك حساب؟ <a href="{% url "login" %}">تسجيل الدخول</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+{% endblock content %}

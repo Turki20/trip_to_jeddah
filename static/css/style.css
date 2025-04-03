@@ -1,0 +1,230 @@
+
+* {
+    font-family: 'Almarai';
+}
+body {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+.container {
+    background: rgb(173,216,230);
+    background: linear-gradient(310deg, rgba(173,216,230,1) 0%, rgba(187,219,228,1) 54%, rgba(242,245,246,1) 100%);
+    width: 100%;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    overflow: hidden;
+}
+
+.circle-right{
+    width: 500px;
+    height: 500px;
+    background-color: #59c5e6;
+    border-radius: 50%;
+    position: absolute;
+    right: -20%;
+    top: -200px;
+    transition: 0.2s ease-in-out;
+    opacity: 90%;
+}
+
+.circle-right-small {
+    width: 100px;
+    height: 100px;
+    background-color: #01617e;
+    border-radius: 50%;
+    position: absolute;
+    opacity: 50%;
+    right: 12%;
+    top: 30px;
+    transition: 0.7s ease-in-out;
+}
+
+.circle-left{
+    width: 500px;
+    height: 500px;
+    background-color: whitesmoke;
+    border-radius: 25%;
+    position: absolute;
+    opacity: 75%;
+    bottom: -100px;
+    left: -20%;
+    transition: 0.5s ease-in-out;
+
+}
+
+.circle-left-small{
+    width: 500px;
+    height: 500px;
+    background-color: #01a6d7;
+    border-radius: 5%;
+    position: absolute;
+    opacity: 25%;
+    bottom: -300px;
+    left: -5%;
+    transition: 0.9s ease-in-out;
+}
+
+.circle-left:hover {
+    transform: scale(1.1);
+}
+
+.container .content {
+    z-index: 100;
+    font-size: 50px;
+    color: #002f3d;
+    transition: opacity 1s ease-in-out; /* ترانزشن للاختفاء */
+}
+
+.container .content p {
+    color: #32444a;
+}
+
+form {
+    z-index: 100;
+    padding: 30px;
+    margin: 20px;
+    color: #32444a;
+}
+.container #input {
+    font-size: large;
+    padding: 10px;
+}
+
+input[type=submit]{
+    width: 300px;
+    height: 75px;
+    border-radius: 10px;
+    box-shadow:  0px 10px 10px #ddf5fc;
+    box-shadow: inset 0px -5px 1px #002f3d;
+    border: 2px #002f3d solid;
+    cursor: pointer;
+    font-size: large;
+    font-weight: 700;
+    color: #002f3d;
+    transition: 0.05s ease-in-out;
+    background-color: whitesmoke;
+}
+
+input[type=submit]:hover {
+    transform: scale(0.9);
+    background-color: #ddf5fc;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #002f3d;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+input[type="checkbox"] {
+    border-radius: 5px;
+}
+input[type="checkbox"]:checked, input[type="radio"]:checked {
+    background-color: #002f3d;
+    border-color: #002f3d;
+}
+input[type="checkbox"]:checked::after, input[type="radio"]:checked::after {
+    content: '\2713';
+    font-size: 10px;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
+
+.content label {
+    font-size: xx-large;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    color: #002f3d;
+}
+
+.container #input input {
+    margin-top: 15px;
+}
+
+
+.container i {
+    z-index: 100;
+    font-size: 70px;
+    opacity: 70%;
+    color: #01617e;
+    padding: 25px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+.container #btnDown {
+    position: absolute;
+    bottom: 50px;
+}
+
+.container #btnUp {
+    position: absolute;
+    top: -100px;
+}
+
+.fade-out {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+.fade-in {
+    opacity: 1; 
+    transition: opacity 0.5s ease-in-out;
+}
+
+
+
+@media only screen and (max-width: 1000px) {
+    .container .content {
+        font-size: 20px;
+    }
+    .circle-left-small{
+        width: 400px;
+        height: 400px;
+    }
+
+    .circle-left {
+        width: 400px;
+    }
+
+    .circle-right {
+        width: 400px;
+    }
+    .circle-right-small {
+        right: 150px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .container .content {
+        font-size: 15px;
+    }
+
+    .container #input {
+        font-size: large;
+        padding: 10px;
+    }
+    
+    .content label {
+        font-size: x-large;
+        margin-bottom: 20px;
+        margin-top: 10px;
+    }
+}
+

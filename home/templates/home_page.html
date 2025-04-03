@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% load static %} {# تحميل الملفات الثابتة مثل CSS و JavaScript #}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "/css/home.css" %}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% endblock style %}
+
+
+
+
+{% block content %}
+
+{% include "header.html" %} {# تضمين رأس الصفحة (Header) #}
+<main>
+    {# عنوان فرعي للصفحة الرئيسية #}
+    <div class="subheader">
+        <h1>الصفحة الرئيسية</h1>
+    </div>
+
+
+    <div class="cointaner">
+        {# القسم الأيسر للصفحة - يتضمن صورة وأزرار #}
+        <div class="left-side">
+            <div class="left-side-top">
+                <img src="https://img.freepik.com/premium-vector/route-location-icon-journey-map-illustration-symbol-path-gps-vector_744955-1017.jpg"
+                    alt="">
+            </div>
+            <div class="left-side-bott">
+                <h4>ودك تسوي جدولك بنفسك؟</h4>
+                <button><a href="">بضبط نفسي</a></button>
+            </div>
+        </div>
+
+        {# القسم الأيمن للصفحة - يعرض الرحلات القادمة وإعدادات تخصيص الرحلة #}
+        <div class="right-side">
+            <h3> رحلتك القادمة</h3>
+            <h3><button onclick="editUserInputs(this)">جديد</button><button id="bttn" onclick="swap(this)">المطاعم <i class="fa-solid fa-arrow-left"></i></button></h3>
+            
+            {# نموذج لتخصيص الرحلة، يظهر عند النقر على زر "جديد" #}
+            <div id="form" class="form" style="display: none;">
+                <form action="{% url 'home' %}" method="post" id="formSubmit">
+                    {% csrf_token %}
+                    <div id="input" class="content">
+                        <label>الاماكن اللي تحب تزورها؟</label><br>
+                        <input type="checkbox" name="places" value="historical">متاحف ومراكز ثقافية<br>
+                        <input type="checkbox" name="places" value="beaches"> شواطئ وأنشطة بحرية<br>
+                        <input type="checkbox" name="places" value="malls">مجمعات تسوق<br>
+                        <input type="checkbox" name="places" value="markets">اسواق شعبية<br>
+                        <input type="checkbox" name="places" value="themeparks">اماكن ترفيهية<br>
+                        <input type="checkbox" name="places" value="museums">معارض ومساحات فنية<br>
+                        <input type="checkbox" name="places" value="parks"> حدائق ومنتزهات<br><br>
+                    </div>
+                    <div id="input" class="content">
+                        <label>وش تحب تاكل؟</label><br>
+                        <input type="checkbox" name="restaurants" value="fastfood"> مطاعم الوجبات السريعة<br>
+                        <input type="checkbox" name="restaurants" value="international"> مطاعم عالمية<br>
+                        <input type="checkbox" name="restaurants" value="specialty"> مطاعم متخصصه مثل(اكل ايطالي، فرنسي، لبناني...الخ)<br>
+                        <input type="checkbox" name="restaurants" value="seafood">اكلات بحرية<br>
+                        <input type="checkbox" name="restaurants" value="local"> مطاعم شعبية (مأكولات محلية)<br>
+                        <input type="checkbox" name="restaurants" value="cafe">مقاهي<br><br>
+            
+                        <label>كم بتاخذ يوم عندنا؟</label><br>
+                        <input type="number" name="duration"><br><br>
+                    </div>
+                    <div id="input"  class="content">
+                        <label> هل مصطحب أطفال معك؟</label><br>
+                        <input type="radio" name="kids" value="yes"> نعم، أحتاج أماكن مناسبة للأطفال<br>
+                        <input type="radio" name="kids" value="no"> لا، لا حاجة لأماكن مخصصة للأطفال<br><br>
+            
+                    </div>
+                    <div id="input"  class="content">
+                        <label> هل لديك اهتمامات خاصة؟</label><br>
+                        <input type="checkbox" name="interests" value="photography"> أماكن مناسبة للتصوير<br>
+                        <input type="checkbox" name="interests" value="art"> تجارب فنية وثقافية<br>
+                        <input type="checkbox" name="interests" value="sports"> أنشطة رياضية ومغامرات<br>
+                        <input type="checkbox" name="interests" value="events"> الفعاليات والمهرجانات<br>
+                        <input type="checkbox" name="interests" value="quiet"> أماكن هادئة ومريحة<br>
+                        <input type="checkbox" name="interests" value="crowded"> أماكن حيوية ومزدحمة<br><br>
+                    </div>
+                    <div id="input"  class="content">
+                        <input type="submit" value="ارسال">
+                    </div>
+            
+                </form>
+            </div>
+
+            {# عرض قائمة الأماكن المخصصة بناءً على تفضيلات المستخدم #}
+            <ul id="places">
+                {% for i in customPlaces %}
+                <li>
+                    <div class="li">
+                        <div class="circle"></div>
+                        <div class="arro"></div>
+                    </div>
+                    <div>
+                        <h5>{{i.name}}</h5>
+                        <p>{{i.short_desc}}</p>
+                        <p><em style="color: #002f3d77">{{i.category}}</em></p>
+                    </div>
+                    <div class="editBttns">
+                        <a href="{% url 'place_details' i.id %}"><button><i class="fa-solid fa-newspaper"></i></button></a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            {# عرض قائمة المطاعم بناءً على تفضيلات المستخدم #}
+            <ul id="rests" style="display: none;">
+                {% for i in customRestaurants %}
+                <li>
+                    <div class="li">
+                        <div class="circle"></div>
+                        <div class="arro"></div>
+                    </div>
+                    <div>
+                        <h5>{{i.name}}</h5>
+                        <p>{{i.desc}}</p>
+                        <p><em style="color: #002f3d77">{{i.category}}</em></p>
+                    </div>
+                    <div class="editBttns">
+                        <a href="{% url 'rest_details' i.id %}"><button><i class="fa-solid fa-newspaper"></i></button></a>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+
+            <div class="btns">
+                <a href=""><button id="pdfButton">ارسال PDF</button></a>
+            </div>
+        </div>
+
+    </div>
+
+    {# قسم البحث عن أماكن سياحية في جدة #}
+    <div class="cointaner c">
+
+        <div class="right-side-main">
+
+            {# فورم للبحث عن الاماكن #}
+            <div class="top-section-content">
+                <h3>السياحة في جدة</h3>
+                <form action="{% url "home_page" %}" method='post'>
+                    {% csrf_token %}
+                    <div class="search">
+
+                        <input name="search" type="text" placeholder="البحث عن مكان">
+                        <button type="submit">بحث</button>
+                    </div>
+                    <div class="filter">
+                        <div>
+                            <label for="category">الفئة</label>
+                            <select name="category" id="category">
+                                <option value="-1">الكل</option>
+                                {% if categories %}
+                                {% for i in categories %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                                {% endif %}
+                            </select>
+                        </div>
+                        <div>
+                            <!-- 
+                            <label for="re">التقييم</label>
+                            <select name="" id="re">
+                                <option value="">الكل</option>
+                                <option value="">اعلى من 4</option>
+                                <option value="">اعلى من 3</option>
+                                <option value="">اقل من 3</option>
+                            </select>
+                            -->
+                            
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            {# عرض قائمة الأماكن السياحية #}
+            <div class="bottom-section-content">
+                <ul class="ul">
+
+                    {% if places %}
+                    {% for i in places %}
+                    <li class="li">
+                        <h4>{{i.name}}</h4>
+                        <div>
+                            {% if i.image %}
+                            <img src="{{i.image.url}}" alt="i.name">
+                            {% else %}
+                            <img src="https://www.mountaineers.org/images/placeholder-images/RoutesPlacesDefaultImage.jpg" alt="i.name">
+                            {% endif %}
+                            
+                            <div>
+                                <p>{{i.long_desc}}</p>
+                                <a href="{% url 'place_details' i.id %}"><button>القراءة عن المكان</button></a>
+                            </div>
+                        </div>
+
+                    </li>
+                    {% endfor %}
+                    {% else %}
+                    {% endif %}
+
+                </ul>
+            </div>
+        </div>
+        
+        {# رابط لصفحة الملف الشخصي #}
+        <a href="{% url "profile" %}" class="left-side-profile">
+            <i class="fa-solid fa-user-tie"></i>
+            <h3>{{user.first_name}}</h3>
+        </a>
+    </div>
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block style %}
+<link rel="stylesheet" href="{% static "/css/home.css" %}">
+{% endblock style %}
+
+{% block content %}
+      
+{% include "header.html" %}
+
+<main>
+    <div class="subheader">
+        <h1>تسجيل الدخول</h1>
+    </div>
+    <div class="cointaner" style="justify-content: center; text-align: center;">
+        <div class="right-side">
+            <form action="{% url 'login' %}" method="post" class="inputs">
+                <!-- 
+                <div class="inputs">
+                    <div class="error"><h3>كلمة المرور او الايميل غير صحيح</h3></div>
+                    <div>
+                        <label for="email">الايميل</label>
+                        <input type="email" name="" id="email">
+                    </div>
+                    <div>
+                        <label for="password">الرقم السري</label>
+                        <input type="password" name="" id="password">
+                    </div>
+                    <p>ليس لديك حساب؟ <a href="">حساب جديد</a></p>
+                </div>
+
+                -->
+                {% csrf_token %}
+                {{ form.as_p }}
+                <div class="btns">
+                    <button type="submit" style="width: 100%;height: 40px; font-size: 17px; background-color: #01617e; color: whitesmoke;">تسجيل الدخول</button>
+                </div>
+                <div>
+                    <span>ليس لديك حساب؟ <a href="{% url 'register' %}">حساب جديد</a></span>
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+<footer>
+    <h4>جميع الحقوق محفوظة</h4>
+</footer>
+
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+
+{% block style %}
+<link rel="stylesheet" href="{% static "/css/style.css" %}">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+{% endblock style %}
+
+{% block content %}
+
+<div class="container" id="container">
+    <div class="circle-right c"></div>
+    <div class="circle-left c"></div>
+    <div class="circle-left-small c"></div>
+    <div class="circle-right-small c"></div>
+    <div class="content" style="display: block;">
+        <h1>ياهلا وغلا وأعز من يجينا!</h1>
+        <p>بنعطيكم شوي من جو جدة.</p>
+    </div>
+    <div class="content" style="display: none; opacity: 0;">
+        <h1>بنسألك اسئلة خفيفة لطيفة</h1>
+        <p>عشان نشوف جوك ونضبطك!</p>
+    </div>
+    <form action="{% url 'home' %}" method="post">
+        {% csrf_token %}
+        <div id="input" class="content" style="display: none; opacity: 1;">
+            <label>الاماكن اللي تحب تزورها؟</label><br>
+            <input type="checkbox" name="places" value="historical">متاحف ومراكز ثقافية<br>
+            <input type="checkbox" name="places" value="beaches"> شواطئ وأنشطة بحرية<br>
+            <input type="checkbox" name="places" value="malls">مجمعات تسوق<br>
+            <input type="checkbox" name="places" value="markets">اسواق شعبية<br>
+            <input type="checkbox" name="places" value="themeparks">اماكن ترفيهية<br>
+            <input type="checkbox" name="places" value="museums">معارض ومساحات فنية<br>
+            <input type="checkbox" name="places" value="parks"> حدائق ومنتزهات<br><br>
+        </div>
+        <div id="input" class="content" style="display: none; opacity: 1;">
+            <label>وش تحب تاكل؟</label><br>
+            <input type="checkbox" name="restaurants" value="fastfood"> مطاعم الوجبات السريعة<br>
+            <input type="checkbox" name="restaurants" value="international"> مطاعم عالمية<br>
+            <input type="checkbox" name="restaurants" value="specialty"> مطاعم متخصصه مثل(اكل ايطالي، فرنسي، لبناني...الخ)<br>
+            <input type="checkbox" name="restaurants" value="seafood">اكلات بحرية<br>
+            <input type="checkbox" name="restaurants" value="local"> مطاعم شعبية (مأكولات محلية)<br>
+            <input type="checkbox" name="restaurants" value="cafe">مقاهي<br><br>
+
+            <label>كم بتاخذ يوم عندنا؟</label><br>
+            <input id="numberInput" type="number" name="duration" style="width: 100%; height: 30px; border: 2px #002f3d solid; border-radius: 5px; background: none;"><br>
+        </div>
+        <div id="input"  class="content" style="display: none; opacity: 0;">
+            <label> هل مصطحب أطفال معك؟</label><br>
+            <input type="radio" name="kids" value="yes"> نعم، أحتاج أماكن مناسبة للأطفال<br>
+            <input type="radio" name="kids" value="no"> لا، لا حاجة لأماكن مخصصة للأطفال<br><br>
+
+        </div>
+        <div id="input"  class="content" style="display: none; opacity: 0;">
+            <label> هل لديك اهتمامات خاصة؟</label><br>
+            <input type="checkbox" name="interests" value="photography"> أماكن مناسبة للتصوير<br>
+            <input type="checkbox" name="interests" value="art"> تجارب فنية وثقافية<br>
+            <input type="checkbox" name="interests" value="sports"> أنشطة رياضية ومغامرات<br>
+            <input type="checkbox" name="interests" value="events"> الفعاليات والمهرجانات<br>
+            <input type="checkbox" name="interests" value="quiet"> أماكن هادئة ومريحة<br>
+            <input type="checkbox" name="interests" value="crowded"> أماكن حيوية ومزدحمة<br><br>
+        </div>
+        <div id="input"  class="content" style="display: none; opacity: 0;">
+            <input type="submit" value="ارسال">
+        </div>
+
+    </form>
+        <i onclick="pageDown()" onmouseleave="returnShape()" onmouseenter="changeShape()" id="btnDown"
+        class="fa-solid fa-arrow-down"></i>
+        <i onclick="pageUp()" onmouseleave="returnShape()" onmouseenter="changeShape()" class="fa-solid fa-arrow-up " id="btnUp" style="display: block;"></i>
+</div>
+
+{% endblock content %}
+
