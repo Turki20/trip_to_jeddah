@@ -59,3 +59,12 @@ python manage.py migrate
 python manage.py runserver
 ```
 
+## interface
+<img src="https://github.com/user-attachments/assets/5b0cc2d4-cf74-440a-b1ea-488e3d61ff80" alt="App Interface" width="500"/>
+<img src="https://github.com/user-attachments/assets/c72dab17-3e97-487b-b72d-dcde9a09887e" alt="App Interface" width="500"/>
+<br>
+<img src="https://github.com/user-attachments/assets/a03feac5-7542-4651-b100-83211daf2dcc" alt="App Interface" width="300"/>
+<img src="https://github.com/user-attachments/assets/3dc730cd-c89b-4119-81eb-4c4e5443669d" alt="App Interface" width="300"/>
+<img src="https://github.com/user-attachments/assets/33f1237b-ccf2-4e00-8c1e-1ad3f6f55bcc" alt="App Interface" width="300"/>
+
+
