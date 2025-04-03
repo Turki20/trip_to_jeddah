@@ -15,25 +15,30 @@ Before installing the project, ensure that you have the following prerequisites 
 - pip
 
 ## Installation and Setup
-
+* terminal (windows)
 ```bash
 git clone https://github.com/Turki20/trip_to_jeddah.git
 cd trip_to_jeddah
+```
+```bash
 python -m virtualenv env
-// for windows
+```
+```bash
 cd env/Scripts
 activate
 cd ..
 cd ..
-pip install -r requirements.txt
+```
 ```bash
+pip install -r requirements.txt
+```
 
-// MySQL
+* MySQL
 ```sql
 CREATE DATABASE trip_to_jeddah;
-```sql
-// setting.py
-```bash
+```
+* setting.py
+```python
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -44,10 +49,13 @@ DATABASES = {
         'PORT': '',
     }
 }
-
+```
+* terminal (windows)
+``` bash
 python manage.py makemigrations
 python manage.py migrate
-
-python manage.py runserver
+```
 ```bash
+python manage.py runserver
+```
 
